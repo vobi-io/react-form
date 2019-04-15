@@ -1,4 +1,4 @@
-import initialState from './initialState'
+import initialState from './initial-state'
 import validators from './validators'
 import validate from './validate'
 

@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import initialState from './initialState'
+import initialState from './initial-state'
 import validators from './validators'
 import validate from './validate'
 import formReducer from './reducer'
