@@ -1,6 +1,13 @@
 import React from 'react'
-// import { useForm } from '@vobi/react-form'
-import useForm from './use-form/use-form'
+import { useForm } from '@vobi/react-form'
+
+const simulateApiCall = async (timeout = 1500) => {
+  await new Promise(resolve => setTimeout(resolve, timeout));
+}
+
+const errStyles = {
+  color: 'red'
+}
 
 const App = () => {
   const {
@@ -9,20 +16,27 @@ const App = () => {
     submit,
     valid,
     errors,
+    submitted,
+    submitting,
   } = useForm({
     initialValues: {
       firstName: '',
       lastName: '',
     },
     validations: {
+      firstName: ['required'],
       lastName: ['required']
     },
-    submitHandler: ({ values }) => {
+    submitHandler: async ({ values, resetForm }) => {
       console.log('values', values)
+      console.log('submitting...')
+      
+      await simulateApiCall(3000)
+      
+      resetForm()
+      console.log('submitted!')
     }
   })
-  // console.log('valid', valid)
-  // console.log('errors', errors)
 
   return (
     <div>
@@ -34,6 +48,7 @@ const App = () => {
             setValue({ firstName: e.target.value })
           }}
         />
+        {submitted && errors.firstName && <div style={errStyles}>{errors.firstName}</div>}
         <br /><br />
         <label>Last name</label>
         <input
@@ -42,8 +57,14 @@ const App = () => {
             setValue({ lastName: e.target.value })
           }}
         />
+        {submitted && errors.lastName && <div style={errStyles}>{errors.lastName}</div>}
         <br /><br />
-        <button type="submit">Save</button>
+        <button
+          disabled={submitting || (submitted && !valid)}
+          type="submit"
+        >
+          {submitting ? 'Saving...' : 'Save'}
+        </button>
       </form>
     </div>
   )
