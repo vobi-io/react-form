@@ -1,3 +1,7 @@
 import useForm from './use-form/use-form'
 
-export useForm
+const exports = {
+  useForm
+}
+
+export default exports
