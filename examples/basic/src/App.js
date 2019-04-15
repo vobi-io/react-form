@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { useForm } from '@vobi/react-form'
+import React from 'react'
+// import { useForm } from '@vobi/react-form'
+import useForm from './use-form/use-form'
 
 const App = () => {
   const {
@@ -15,12 +14,15 @@ const App = () => {
       firstName: '',
       lastName: '',
     },
+    validations: {
+      lastName: ['required']
+    },
     submitHandler: ({ values }) => {
       console.log('values', values)
     }
   })
-  console.log('valid', valid)
-  console.log('errors', errors)
+  // console.log('valid', valid)
+  // console.log('errors', errors)
 
   return (
     <div>
@@ -41,10 +43,10 @@ const App = () => {
           }}
         />
         <br /><br />
-        {/* <button type="submit">Save</button> */}
+        <button type="submit">Save</button>
       </form>
     </div>
   )
 }
 
-export default App;
+export default App

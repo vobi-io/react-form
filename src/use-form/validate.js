@@ -47,8 +47,8 @@ const validate = (values, errors, validations, validators) => {
     }
   }
 
-  if (Object.keys(newErrors).length === 0) {
-    valid = true
+  if (Object.keys(newErrors).length > 0) {
+    valid = false
   }
 
   return {

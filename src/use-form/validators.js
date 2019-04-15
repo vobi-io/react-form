@@ -4,11 +4,11 @@ const validators = {
       !val || (Array.isArray(val) && !val.length)
         ? 'Required'
         : null,
-  email:
-    val =>
-      val && !isEmail(val)
-        ? 'Invalid email'
-        : null,
+  // email:
+  //   val =>
+  //     val && !isEmail(val)
+  //       ? 'Invalid email'
+  //       : null,
 }
 
 export default validators
