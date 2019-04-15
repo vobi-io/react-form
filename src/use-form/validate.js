@@ -5,7 +5,7 @@ const getVal = value => Object.values(value)[0]
 
 const validate = (values, errors, validations, validators) => {
   let newErrors = Object.assign({}, errors)
-  let valid = false
+  let valid = true
 
   for (const key in values) {
     if (validations[key]) {
@@ -40,15 +40,15 @@ const validate = (values, errors, validations, validators) => {
           ...{ [key]: fieldErrs },
           ...newErrors,
         }
-        valid = false
       } else {
         const { [key]: v, ...stateWithout } = newErrors
         newErrors = stateWithout
-        if (Object.keys(newErrors).length === 0) {
-          valid = true
-        }
       }
     }
+  }
+
+  if (Object.keys(newErrors).length === 0) {
+    valid = true
   }
 
   return {
