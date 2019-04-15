@@ -12,8 +12,6 @@ const validate = (values, errors, validations, validators) => {
       const fieldErrs = validations[key].reduce((errs, rule) => {
         let v = null
         if (typeof rule === 'object') {
-          // const key = getKey(rule)
-          // const matchKey = getVal(rule)
           v = validators[getKey(rule)](values[key], values, getVal(rule))
         } else if (typeof rule === 'function') {
           v = rule(values)
@@ -21,24 +19,15 @@ const validate = (values, errors, validations, validators) => {
           v = validators[rule](values[key])
         }
 
-        // const v = validators[rule](values[key])
         return v
           ? [...errs, v]
           : errs
-
-        // if (v) {
-        //   return [...errs, v]
-        //   errs.push(v)
-        // } else {
-        //   return errs
-        // }
-        // return errs
       }, [])
 
       if (fieldErrs.length > 0) {
         newErrors = {
-          ...{ [key]: fieldErrs },
           ...newErrors,
+          ...{ [key]: fieldErrs },
         }
       } else {
         const { [key]: v, ...stateWithout } = newErrors

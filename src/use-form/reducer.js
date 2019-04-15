@@ -1,8 +1,7 @@
-import initialState from './initial-state'
 import validators from './validators'
 import validate from './validate'
 
-const formReducer = (state = initialState, action) => {
+const formReducer = (state, action) => {
   switch (action.type) {
   case 'newValue': {
     const values = {

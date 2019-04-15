@@ -15,23 +15,25 @@ const App = () => {
     setValue,
     submit,
     valid,
-    errors,
     submitted,
     submitting,
+    getFirstError,
   } = useForm({
     initialValues: {
       firstName: '',
       lastName: '',
+      email: '',
     },
     validations: {
       firstName: ['required'],
-      lastName: ['required']
+      lastName: ['required'],
+      email: ['required', 'email']
     },
     submitHandler: async ({ values, resetForm }) => {
       console.log('values', values)
       console.log('submitting...')
       
-      await simulateApiCall(3000)
+      await simulateApiCall(1500)
       
       resetForm()
       console.log('submitted!')
@@ -48,7 +50,7 @@ const App = () => {
             setValue({ firstName: e.target.value })
           }}
         />
-        {submitted && errors.firstName && <div style={errStyles}>{errors.firstName}</div>}
+        {submitted && getFirstError('firstName') && <div style={errStyles}>{getFirstError('firstName')}</div>}
         <br /><br />
         <label>Last name</label>
         <input
@@ -57,7 +59,16 @@ const App = () => {
             setValue({ lastName: e.target.value })
           }}
         />
-        {submitted && errors.lastName && <div style={errStyles}>{errors.lastName}</div>}
+        {submitted && getFirstError('lastName') && <div style={errStyles}>{getFirstError('lastName')}</div>}
+        <br /><br />
+        <label>Email</label>
+        <input
+          value={values.email}
+          onChange={e => {
+            setValue({ email: e.target.value })
+          }}
+        />
+        {submitted && getFirstError('email') && <div style={errStyles}>{getFirstError('email')}</div>}
         <br /><br />
         <button
           disabled={submitting || (submitted && !valid)}
