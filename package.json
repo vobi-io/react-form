@@ -1,6 +1,6 @@
 {
   "name": "@vobi/react-form",
-  "version": "0.0.5-alpha",
+  "version": "0.0.6-alpha",
   "description": "Reusable form library for React: Form component, withForm HOC, useForm hook",
   "main": "./lib/index.js",
   "license": "MIT",

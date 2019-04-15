@@ -1,7 +1,1 @@
-import useForm from './use-form/use-form'
-
-const exports = {
-  useForm
-}
-
-export default exports
+export { default as useForm } from './use-form/use-form'
